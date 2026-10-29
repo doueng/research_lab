@@ -1,0 +1,33 @@
+[lab]
+objective = """
+Build deep, unusual knowledge of London: its history, hidden places, architecture, infrastructure
+(rivers, tunnels, railways), neighbourhoods and the stories behind street names and buildings.
+Prefer rare, high-signal sources: long-running local history blogs, British History Online and
+archive material, London Society / local history society publications, walk write-ups by obsessive
+locals, and old maps. Avoid tourist top-10 lists and listicles.
+"""
+
+[[lead]]
+target = "https://www.british-history.ac.uk/"
+reason = "Primary and secondary sources on London's parishes, streets and buildings (Survey of London)."
+priority = 75
+
+[[lead]]
+target = "https://alondoninheritance.com/"
+reason = "Blog comparing old photographs with the same spots today, with deep research per post."
+priority = 70
+
+[[lead]]
+target = "https://www.ianvisits.co.uk/"
+reason = "Ian Visits. Obscure openings, tunnels, events and London infrastructure history."
+priority = 70
+
+[[lead]]
+target = "https://diamondgeezer.blogspot.com/"
+reason = "Daily blog since 2002 walking every corner of London, including its lost rivers and boundaries."
+priority = 60
+
+[[lead]]
+target = "What are London's lost rivers, where do they still surface, and which sources map their courses best?"
+reason = "Classic rare-knowledge topic that ties together geography, sewers and street names."
+priority = 80

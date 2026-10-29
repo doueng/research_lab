@@ -6,7 +6,7 @@
  '("python@3.12"
    "uv"
    "gcc-toolchain"   ; libgcc_s for manylinux wheels (pydantic-core, jiter, ormsgpack, primp, uuid-utils)
-   "sqlite"          ; sqlite3 CLI to inspect the dataroom (lab.db)
+   "sqlite"          ; sqlite3 CLI to inspect the datarooms (data/*.db)
    "git"
    "coreutils"
    "bash"))

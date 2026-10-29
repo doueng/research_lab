@@ -1,4 +1,4 @@
-"""The dataroom: plain SQLite so you can poke at it with `sqlite3 lab.db`."""
+"""The dataroom: plain SQLite so you can poke at it with `sqlite3 data/<subject>.db`."""
 
 import sqlite3
 from pathlib import Path
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS leads (
   priority INTEGER NOT NULL DEFAULT 50,
   status TEXT NOT NULL DEFAULT 'open',  -- open | done | dropped
   attempts INTEGER NOT NULL DEFAULT 0,
-  from_tick INTEGER                 -- NULL means it came from seeds.toml
+  from_tick INTEGER                 -- NULL means it came from the subject's seeds file
 );
 CREATE TABLE IF NOT EXISTS findings (
   id INTEGER PRIMARY KEY,

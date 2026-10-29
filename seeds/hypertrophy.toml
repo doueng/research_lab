@@ -1,0 +1,34 @@
+[lab]
+objective = """
+Build deep, evidence-based understanding of skeletal muscle hypertrophy for a natural lifter:
+training volume, intensity and proximity to failure, frequency, exercise selection and range of motion,
+protein intake and energy balance, and individual response.
+Prefer rare, high-signal sources: primary studies and meta-analyses, critiques of their methods,
+researcher blogs and long-form reviews (Stronger By Science, Schoenfeld, Nuckols, Helms), and forum
+threads where researchers argue over data. Avoid bro-science and supplement marketing.
+"""
+
+[[lead]]
+target = "https://www.strongerbyscience.com/"
+reason = "Long-form, citation-heavy articles that critique study methods rather than just summarise them."
+priority = 75
+
+[[lead]]
+target = "What do the recent meta-analyses say about the dose-response of weekly set volume for hypertrophy, and where do they disagree?"
+reason = "Volume is the most argued variable; the disagreements reveal the methodological limits."
+priority = 85
+
+[[lead]]
+target = "Does training at long muscle lengths (lengthened partials, stretch-mediated hypertrophy) beat full range of motion?"
+reason = "Active research front with new studies and strong opinions on both sides."
+priority = 80
+
+[[lead]]
+target = "How close to failure do sets need to be for hypertrophy, per the proximity-to-failure studies?"
+reason = "Practical for programming; recent work quantifies reps in reserve."
+priority = 70
+
+[[lead]]
+target = "https://pubmed.ncbi.nlm.nih.gov/?term=schoenfeld+hypertrophy"
+reason = "Brad Schoenfeld's output is the backbone of the field; a map of primary studies."
+priority = 55

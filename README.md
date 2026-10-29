@@ -1,7 +1,8 @@
 # Research Lab
 
 A seeded, stateful research agent that hunts for *rare tokens* (high-signal, little-seen sources).
-The research subject is GNU Guix and Linux configs built on it. The real goal is learning LangChain and LangGraph.
+It can research several subjects, each defined by a seeds file (`seeds/<name>.toml`: objective plus starting leads).
+Shipped: `guix` (the default), `memory`, `hypertrophy`, `london`. The real goal is learning LangChain and LangGraph.
 It is based on the "self-editing heartbeats with seeds" idea, but runs are manual: one `lab tick` = one heartbeat.
 
 ## Dev environment (Guix)
@@ -31,17 +32,23 @@ Python LSP is `pylsp` from Guix Home. With `direnv allow` done, Emacs envrc-mode
 Inside the dev environment (`.venv` active):
 
 ```sh
-lab seed                       # load seeds.toml (idempotent)
+lab subjects                   # list seeds/*.toml and which are seeded
+lab -s memory seed             # load seeds/memory.toml into data/memory.db (idempotent)
+lab -s memory tick             # every command takes -s/--subject (default $LAB_SUBJECT or guix)
+lab seed                       # load seeds/guix.toml
 lab tick                       # one research iteration on exactly one lead
 lab status                     # scratchpad + frontier
 lab findings                   # what has been saved
 lab rate 3 5                   # your 1-5 rating: the ground truth for future evals
 lab lead URL "why" 90          # steer it by hand
-sqlite3 lab.db                 # the dataroom is plain SQLite
+sqlite3 data/guix.db           # each subject's dataroom is plain SQLite
 pytest -q                      # deterministic tests, no API key needed
 ```
 
-If a tick crashes, the next `lab tick` resumes it from the last checkpointed node (lab.ckpt.db).
+Subjects never share state: each has its own objective, scratchpad, frontier, findings and tick numbering.
+To add one, write `seeds/<name>.toml` (copy an existing one) and run `lab -s <name> seed`.
+
+If a tick crashes, the next `lab tick` resumes it from the last checkpointed node (data/<subject>.ckpt.db).
 
 ## How a tick works (src/lab/graph.py)
 

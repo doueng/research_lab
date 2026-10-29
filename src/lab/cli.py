@@ -1,21 +1,47 @@
-"""Command line: lab seed | status | tick | findings | rate ID N | lead TARGET REASON [PRIORITY]."""
+"""Command line: lab [-s SUBJECT] seed | status | tick | findings | rate ID N | lead TARGET REASON [PRI] | subjects."""
 
 import argparse
 import os
 import sqlite3
+import sys
 import tomllib
+from dataclasses import dataclass
+from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
 
 from lab import db
 
 load_dotenv(find_dotenv(usecwd=True))  # .env from the working directory up; already-set env vars win
-DB = os.environ.get("LAB_DB", "lab.db")
+SEEDS_DIR, DATA_DIR = Path("seeds"), Path("data")
 MODEL = os.environ.get("LAB_MODEL", "codex:gpt-6-sol")
 
 
+@dataclass(frozen=True)
+class Subject:
+    """A research subject exists iff seeds/<name>.toml does. Each one gets its own dataroom."""
+
+    name: str
+
+    @property
+    def seeds(self) -> Path:
+        return SEEDS_DIR / f"{self.name}.toml"
+
+    @property
+    def db(self) -> Path:
+        return DATA_DIR / f"{self.name}.db"
+
+    @property
+    def ckpt(self) -> Path:
+        return DATA_DIR / f"{self.name}.ckpt.db"
+
+
+def subjects() -> list[Subject]:
+    return [Subject(p.stem) for p in sorted(SEEDS_DIR.glob("*.toml"))]
+
+
 def cmd_seed(conn, a):
-    with open(a.file, "rb") as fh:
+    with open(a.subject.seeds, "rb") as fh:
         seeds = tomllib.load(fh)
     db.set_meta(conn, "objective", seeds["lab"]["objective"].strip())
     added = sum(db.add_lead(conn, s["target"], s["reason"], s.get("priority", 50)) for s in seeds["lead"])
@@ -42,10 +68,11 @@ def cmd_tick(conn, a):
     from lab.models import chat_model
     from lab.tools import default_tools
 
-    ckpt = SqliteSaver(sqlite3.connect(DB.removesuffix(".db") + ".ckpt.db", check_same_thread=False))
+    ckpt = SqliteSaver(sqlite3.connect(a.subject.ckpt, check_same_thread=False))
     out = run_tick(conn, build_graph(conn, chat_model(MODEL), default_tools(), checkpointer=ckpt))
     inv = out["investigation"]
-    print(f"tick {out['tick']}: {out['lead']['target'] if out['lead'] else 'explore: ' + out['plan']['explore_query']}")
+    where = out["lead"]["target"] if out["lead"] else "explore: " + out["plan"]["explore_query"]
+    print(f"[{a.subject.name}] tick {out['tick']}: {where}")
     print(f"  {inv['summary']}")
     for f in inv["findings"]:
         print(f"  + {f['title']}  {f['url']}")
@@ -66,10 +93,18 @@ def cmd_lead(conn, a):
     print("added" if db.add_lead(conn, a.target, a.reason, a.priority) else "already present")
 
 
+def list_subjects():
+    for s in subjects():
+        print(f"  {s.name:<14} {'seeded' if s.db.exists() else 'not seeded (run: lab -s ' + s.name + ' seed)'}")
+
+
 def main():
     ap = argparse.ArgumentParser(prog="lab")
+    ap.add_argument("-s", "--subject", default=os.environ.get("LAB_SUBJECT", "guix"),
+                    help="research subject, one of seeds/*.toml (default: $LAB_SUBJECT or guix)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("seed").add_argument("file", nargs="?", default="seeds.toml")
+    sub.add_parser("subjects")
+    sub.add_parser("seed")
     sub.add_parser("status")
     sub.add_parser("tick")
     sub.add_parser("findings").add_argument("-n", type=int, default=20)
@@ -81,4 +116,11 @@ def main():
     lp.add_argument("reason")
     lp.add_argument("priority", type=int, nargs="?", default=70)
     a = ap.parse_args()
-    globals()[f"cmd_{a.cmd}"](db.connect(DB), a)
+    if a.cmd == "subjects":
+        return list_subjects()
+    a.subject = Subject(a.subject)
+    if not a.subject.seeds.exists():
+        sys.exit(f"unknown subject {a.subject.name!r}: no {a.subject.seeds}. Known: "
+                 + (", ".join(s.name for s in subjects()) or "(none)"))
+    DATA_DIR.mkdir(exist_ok=True)
+    globals()[f"cmd_{a.cmd}"](db.connect(a.subject.db), a)

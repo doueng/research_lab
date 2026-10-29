@@ -1,0 +1,34 @@
+[lab]
+objective = """
+Build deep, practical understanding of human memory and learning: how encoding, consolidation, retrieval
+and forgetting work, and which techniques (spaced repetition, retrieval practice, interleaving, sleep)
+measurably improve long-term retention for a self-directed adult learner.
+Prefer rare, high-signal sources: primary papers and replication attempts, scheduler algorithm write-ups
+(SuperMemo, FSRS), long-form essays by heavy practitioners, and forum threads with real data.
+Avoid generic "10 memory hacks" articles and unreplicated pop-psychology claims.
+"""
+
+[[lead]]
+target = "https://gwern.net/spaced-repetition"
+reason = "Gwern's long, heavily cited review of spaced repetition research and practice."
+priority = 80
+
+[[lead]]
+target = "http://augmentingcognition.com/ltm.html"
+reason = "Michael Nielsen on using Anki to augment long-term memory, written from long personal practice."
+priority = 75
+
+[[lead]]
+target = "https://github.com/open-spaced-repetition/fsrs4anki/wiki"
+reason = "FSRS scheduler wiki. Models of memory stability/difficulty fitted to millions of real reviews."
+priority = 70
+
+[[lead]]
+target = "https://supermemo.guru/wiki/SuperMemo_Guru"
+reason = "Piotr Wozniak's wiki. Decades of first-hand theory on the two-component model of memory."
+priority = 60
+
+[[lead]]
+target = "Which retrieval-practice and spacing effects survived large preregistered replications, and which shrank?"
+reason = "Separates robust findings from the ones the popular literature still repeats."
+priority = 85
