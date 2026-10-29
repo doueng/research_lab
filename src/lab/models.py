@@ -13,7 +13,7 @@ def chat_model(spec: str):
         return _codex(spec.removeprefix("codex:"))
     from langchain.chat_models import init_chat_model
 
-    return init_chat_model(spec)  # API-key providers, e.g. openai:gpt-... or anthropic:claude-...
+    return init_chat_model(spec)  # API-key providers, e.g. openai:gpt-... (others need their langchain-* package)
 
 
 def _codex(model: str):
