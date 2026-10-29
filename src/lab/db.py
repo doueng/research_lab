@@ -52,7 +52,7 @@ def set_meta(conn, key: str, value: str) -> None:
 
 
 def add_lead(conn, target: str, reason: str, priority: int = 50, from_tick=None) -> bool:
-    """Returns False when the lead already exists (dedupe by target)."""
+    """Return False when the lead already exists (dedupe by target)."""
     cur = conn.execute(
         "INSERT OR IGNORE INTO leads (target, reason, priority, from_tick) VALUES (?, ?, ?, ?)",
         (target.strip(), reason, max(0, min(100, priority)), from_tick),

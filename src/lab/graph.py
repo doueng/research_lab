@@ -102,7 +102,7 @@ def build_graph(conn, model, tools, checkpointer=None):
             HumanMessage(f"Objective:\n{state['objective']}\n\nScratchpad:\n{state['scratchpad'] or '(empty)'}"
                          f"\n\nOpen leads:\n{_fmt_leads(frontier)}"),
         ])
-        by_id = {l["id"]: l for l in frontier}
+        by_id = {lead["id"]: lead for lead in frontier}
         lead = by_id.get(p.lead_id)
         if lead is None and not p.explore_query and frontier:
             lead = frontier[0]  # the model picked nothing usable; fall back to the top lead
@@ -173,4 +173,4 @@ def run_tick(conn, graph) -> dict:
 
 
 def _fmt_leads(leads: list[dict]) -> str:
-    return "\n".join(f"#{l['id']} [p{l['priority']}] {l['target']}  ({l['reason']})" for l in leads) or "(none)"
+    return "\n".join(f"#{x['id']} [p{x['priority']}] {x['target']}  ({x['reason']})" for x in leads) or "(none)"

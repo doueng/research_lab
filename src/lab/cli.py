@@ -1,4 +1,4 @@
-"""lab seed | status | tick | findings | rate ID N | lead TARGET REASON [PRIORITY]"""
+"""Command line: lab seed | status | tick | findings | rate ID N | lead TARGET REASON [PRIORITY]."""
 
 import argparse
 import os
@@ -18,21 +18,21 @@ def cmd_seed(conn, a):
     with open(a.file, "rb") as fh:
         seeds = tomllib.load(fh)
     db.set_meta(conn, "objective", seeds["lab"]["objective"].strip())
-    added = sum(db.add_lead(conn, l["target"], l["reason"], l.get("priority", 50)) for l in seeds["lead"])
+    added = sum(db.add_lead(conn, s["target"], s["reason"], s.get("priority", 50)) for s in seeds["lead"])
     print(f"objective set, {added} new leads ({len(seeds['lead']) - added} already present)")
 
 
 def cmd_status(conn, a):
-    n = lambda q: conn.execute(q).fetchone()[0]
-    open_q = "SELECT count(*) FROM leads WHERE status='open'"
-    print(f"ticks {n('SELECT count(*) FROM ticks WHERE finished=1')}  "
-          f"findings {n('SELECT count(*) FROM findings')}  "
-          f"rated {n('SELECT count(*) FROM findings WHERE rating IS NOT NULL')}  "
-          f"open leads {n(open_q)}")
+    def count(q):
+        return conn.execute(f"SELECT count(*) FROM {q}").fetchone()[0]
+
+    open_leads = count("leads WHERE status='open'")
+    print(f"ticks {count('ticks WHERE finished=1')}  findings {count('findings')}  "
+          f"rated {count('findings WHERE rating IS NOT NULL')}  open leads {open_leads}")
     print("\n## scratchpad\n" + (db.get_meta(conn, "scratchpad") or "(empty)"))
     print("\n## top of frontier")
-    for l in db.frontier(conn, 10):
-        print(f"  #{l['id']} p{l['priority']}  {l['target']}")
+    for lead in db.frontier(conn, 10):
+        print(f"  #{lead['id']} p{lead['priority']}  {lead['target']}")
 
 
 def cmd_tick(conn, a):
@@ -76,9 +76,9 @@ def main():
     r = sub.add_parser("rate")
     r.add_argument("id", type=int)
     r.add_argument("score", type=int, choices=range(1, 6))
-    l = sub.add_parser("lead")
-    l.add_argument("target")
-    l.add_argument("reason")
-    l.add_argument("priority", type=int, nargs="?", default=70)
+    lp = sub.add_parser("lead")
+    lp.add_argument("target")
+    lp.add_argument("reason")
+    lp.add_argument("priority", type=int, nargs="?", default=70)
     a = ap.parse_args()
     globals()[f"cmd_{a.cmd}"](db.connect(DB), a)

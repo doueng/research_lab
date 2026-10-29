@@ -10,6 +10,12 @@ It is based on the "self-editing heartbeats with seeds" idea, but runs are manua
 runs `uv sync --frozen` into `.venv` (using only the Guix python) and activates it. Enter it with `direnv allow`
 once, or from bash with `source dev/env.sh`. Python deps live in `uv.lock`, since Guix does not package LangChain.
 
+## Editor / LSP
+
+Python LSP is `pylsp` from Guix Home. With `direnv allow` done, Emacs envrc-mode exports this project's
+`VIRTUAL_ENV`, so pylsp resolves imports from `.venv`. Linter settings live in `setup.cfg`.
+`python dev/lsp_check.py` (inside the dev env) checks go-to-definition and diagnostics the way the editor sees them.
+
 ## Credentials (.env)
 
 `cp .env.example .env` and fill it in. `.env` is gitignored and loaded by `lab` (already-set env vars win).
