@@ -1,10 +1,15 @@
 [lab]
 objective = """
-Build deep, unusual knowledge of London: its history, hidden places, architecture, infrastructure
-(rivers, tunnels, railways), neighbourhoods and the stories behind street names and buildings.
-Prefer rare, high-signal sources: long-running local history blogs, British History Online and
-archive material, London Society / local history society publications, walk write-ups by obsessive
-locals, and old maps. Avoid tourist top-10 lists and listicles.
+Build deep, unusual knowledge of London and find things worth doing there: its history, hidden places,
+architecture, infrastructure (rivers, tunnels, railways), neighbourhoods and the stories behind street names
+and buildings; cool and unusual places to visit (odd museums, curiosities, cemeteries, places rarely open);
+and events and shows worth going to (talks, fringe theatre, comedy, experimental music, repertory film,
+open-house days, walks). Leave out musicals.
+Prefer rare, high-signal sources: long-running local history blogs, British History Online and archive material,
+London Society / local history society publications, walk write-ups by obsessive locals, old maps, independent
+local news and hyperlocal sites, and curated newsletters (many on Substack, whose recommendation lists lead to more).
+Also look for the sources themselves: new blogs, newsletters and listings are findings too.
+Avoid tourist top-10 lists, listicles and paid-placement "what's on" aggregators.
 """
 
 [[lead]]
@@ -31,3 +36,426 @@ priority = 60
 target = "What are London's lost rivers, where do they still surface, and which sources map their courses best?"
 reason = "Classic rare-knowledge topic that ties together geography, sewers and street names."
 priority = 80
+
+# Blogs and newsletters
+
+[[lead]]
+target = "https://spitalfieldslife.com/"
+reason = "The Gentle Author's daily blog since 2009. East End people, trades, shops and history."
+priority = 75
+
+[[lead]]
+target = "https://flickeringlamps.com/"
+reason = "Long-form London history posts on people, crimes and buildings."
+priority = 60
+
+[[lead]]
+target = "https://thelostbyway.com/"
+reason = "Perambulations around London, with photos of overlooked architecture and relics."
+priority = 60
+
+[[lead]]
+target = "https://londonhistorians.wordpress.com/"
+reason = "London Historians' blog. Reviews and articles plus a members' events calendar."
+priority = 55
+
+[[lead]]
+target = "https://lookup.london/"
+reason = "Look Up London. Walking-tour guide's blog on details above eye level."
+priority = 55
+
+[[lead]]
+target = "https://edithsstreets.blogspot.com/"
+reason = "Edith's Streets. Systematic street-by-street walks with history notes."
+priority = 50
+
+[[lead]]
+target = "https://thelondondead.blogspot.com/"
+reason = "The London Dead. Cemeteries, graves and the stories behind them."
+priority = 50
+
+[[lead]]
+target = "https://www.nickelinthemachine.com/"
+reason = "Another Nickel in the Machine. 20th-century London history, nightlife and scandals."
+priority = 50
+
+[[lead]]
+target = "https://municipaldreams.wordpress.com/"
+reason = "Municipal Dreams. Deeply researched histories of London council estates."
+priority = 55
+
+[[lead]]
+target = "https://www.eastlondonhistory.co.uk/"
+reason = "East London History. Stories of the East End."
+priority = 45
+
+[[lead]]
+target = "https://www.ghostsigns.co.uk/"
+reason = "Ghostsigns. Archive of faded painted advertising on London walls."
+priority = 50
+
+[[lead]]
+target = "https://www.londonremembers.com/"
+reason = "London Remembers. Aims to capture every plaque and memorial in London."
+priority = 50
+
+[[lead]]
+target = "https://mappinglondon.co.uk/"
+reason = "Mapping London. Curates the best old and new maps of London."
+priority = 55
+
+[[lead]]
+target = "https://www.subbrit.org.uk/"
+reason = "Subterranea Britannica. Underground sites: tunnels, bunkers, disused stations."
+priority = 65
+
+[[lead]]
+target = "https://www.derelictlondon.com/"
+reason = "Derelict London. Photos of decaying corners plus guided walks."
+priority = 50
+
+[[lead]]
+target = "https://www.londonreconnections.com/"
+reason = "London Reconnections. Detailed transport history and analysis."
+priority = 45
+
+[[lead]]
+target = "https://www.28dayslater.co.uk/tags/london/"
+reason = "28DaysLater urbex forum, London tag. First-hand reports from abandoned sites."
+priority = 45
+
+[[lead]]
+target = "https://londonist.substack.com/"
+reason = "Londonist: Time Machine newsletter. London history."
+priority = 55
+
+[[lead]]
+target = "https://londonistcitykeys.substack.com/"
+reason = "Londonist: Keys to the City. How to explore London like an obsessive."
+priority = 60
+
+[[lead]]
+target = "https://londonspy.substack.com/"
+reason = "London Spy newsletter. Recommended by several London Substacks."
+priority = 55
+
+[[lead]]
+target = "https://littlelondonwhispers.substack.com/"
+reason = "Little London Whispers newsletter."
+priority = 50
+
+[[lead]]
+target = "https://relicsoflondon.substack.com/"
+reason = "Relics of London newsletter. Surviving fragments of old London."
+priority = 60
+
+[[lead]]
+target = "https://woodencity.substack.com/"
+reason = "Wooden City newsletter, recommended by Londonist and London Minute."
+priority = 50
+
+[[lead]]
+target = "https://jamesomalley.substack.com/"
+reason = "Odds and Ends of History by James O'Malley. Curious history, often about London infrastructure."
+priority = 50
+
+[[lead]]
+target = "https://thestreettree.substack.com/"
+reason = "The Street Tree newsletter on London trees and streets."
+priority = 45
+
+[[lead]]
+target = "https://londoninbits.substack.com/"
+reason = "London in Bits. Interviews with London obsessives about where they go."
+priority = 55
+
+[[lead]]
+target = "https://danhancox.substack.com/"
+reason = "Dan Hancox's Honor Oak Riot. South London culture and politics."
+priority = 45
+
+# Local news
+
+[[lead]]
+target = "https://www.londoncentric.media/"
+reason = "LondonCentric. Independent investigative London news from Jim Waterson."
+priority = 65
+
+[[lead]]
+target = "https://www.hackneygazette.co.uk/"
+reason = "Hackney Gazette. Local news and what's on in Hackney."
+priority = 50
+
+[[lead]]
+target = "https://www.hackneycitizen.co.uk/"
+reason = "Hackney Citizen. Independent Hackney news and culture."
+priority = 50
+
+[[lead]]
+target = "https://www.camdennewjournal.co.uk/"
+reason = "Camden New Journal. Long-running independent paper for Camden."
+priority = 45
+
+[[lead]]
+target = "https://www.se1.news/"
+reason = "London SE1 community website. Southwark and Lambeth riverside news and events."
+priority = 50
+
+[[lead]]
+target = "https://www.brixtonbuzz.com/"
+reason = "Brixton Buzz. News, listings, music and activism in Brixton."
+priority = 45
+
+[[lead]]
+target = "https://walthamforestecho.co.uk/"
+reason = "Waltham Forest Echo. Community paper for Walthamstow and Leyton."
+priority = 40
+
+[[lead]]
+target = "https://www.onlondon.co.uk/"
+reason = "On London by Dave Hill. Independent London politics, places and people."
+priority = 45
+
+[[lead]]
+target = "https://insidecroydon.com/"
+reason = "Inside Croydon. Independent Croydon news."
+priority = 35
+
+[[lead]]
+target = "https://greenwichwire.co.uk/"
+reason = "The Greenwich Wire (853). Greenwich and Lewisham news."
+priority = 40
+
+[[lead]]
+target = "https://www.kentishtowner.co.uk/"
+reason = "Kentishtowner. Kentish Town and Camden news, places and events."
+priority = 40
+
+[[lead]]
+target = "https://www.communityjournalism.co.uk/find-a-hyperlocal/"
+reason = "Directory of UK hyperlocal news sites. Mine it for more London boroughs."
+priority = 60
+
+# Events and shows (not musicals)
+
+[[lead]]
+target = "https://londonistlistings.substack.com/"
+reason = "Londonist: Things To Do. Weekly events newsletter."
+priority = 70
+
+[[lead]]
+target = "https://ldncalendar.substack.com/"
+reason = "LDN Calendar newsletter of London events."
+priority = 55
+
+[[lead]]
+target = "https://londonminute.substack.com/"
+reason = "London Minute newsletter. Its recommendations list maps the London Substack scene."
+priority = 60
+
+[[lead]]
+target = "https://nancydurrant.substack.com/"
+reason = "The London Culture Edit by Nancy Durrant, ex-Evening Standard arts editor."
+priority = 60
+
+[[lead]]
+target = "https://rupertrecs.substack.com/"
+reason = "Rupert's Recs. Fringe theatre picks to book now."
+priority = 55
+
+[[lead]]
+target = "https://literarylistingslondon.substack.com/"
+reason = "Literary Listings London. Readings, book launches and talks."
+priority = 50
+
+[[lead]]
+target = "https://londonartroundup.substack.com/"
+reason = "London Art Roundup. Exhibition picks."
+priority = 45
+
+[[lead]]
+target = "https://www.runriot.com/"
+reason = "Run Riot. Listings for alternative arts, performance and club events."
+priority = 65
+
+[[lead]]
+target = "https://www.thenudge.com/"
+reason = "The Nudge. Curated guide to London events and places."
+priority = 50
+
+[[lead]]
+target = "https://www.artrabbit.com/"
+reason = "ArtRabbit. Contemporary art exhibitions and events, including small galleries."
+priority = 45
+
+[[lead]]
+target = "https://www.offwestend.com/"
+reason = "OffWestEnd.com. Venue list and show search for fringe theatre."
+priority = 55
+
+[[lead]]
+target = "https://www.londonpubtheatres.com/"
+reason = "London Pub Theatres. Fringe theatre above pubs and its festivals."
+priority = 50
+
+[[lead]]
+target = "https://www.gresham.ac.uk/"
+reason = "Gresham College. Free public lectures since 1597."
+priority = 60
+
+[[lead]]
+target = "https://www.rigb.org/whats-on"
+reason = "Royal Institution. Science talks and demonstrations."
+priority = 50
+
+[[lead]]
+target = "https://conwayhall.org.uk/"
+reason = "Conway Hall. Talks, debates and Sunday concerts."
+priority = 50
+
+[[lead]]
+target = "https://wellcomecollection.org/events"
+reason = "Wellcome Collection events. Talks, late openings and odd exhibitions on health and humans."
+priority = 50
+
+[[lead]]
+target = "https://www.bishopsgate.org.uk/"
+reason = "Bishopsgate Institute. London history talks, walks and archive events."
+priority = 55
+
+[[lead]]
+target = "https://www.londonmonthofthedead.com/"
+reason = "London Month of the Dead. Autumn talks and tours in cemeteries and crypts."
+priority = 55
+
+[[lead]]
+target = "https://www.cafeoto.co.uk/"
+reason = "Cafe OTO. Experimental and improvised music in Dalston."
+priority = 55
+
+[[lead]]
+target = "https://www.wiltons.org.uk/"
+reason = "Wilton's Music Hall. Oldest surviving grand music hall; theatre, music, talks."
+priority = 50
+
+[[lead]]
+target = "https://puppetbarge.com/"
+reason = "Puppet Theatre Barge. Marionette shows on a boat in Little Venice."
+priority = 45
+
+[[lead]]
+target = "https://www.duckie.co.uk/"
+reason = "Duckie. Queer performance and club nights."
+priority = 40
+
+[[lead]]
+target = "https://princecharlescinema.com/"
+reason = "Prince Charles Cinema. Cult, repertory and all-night film marathons."
+priority = 50
+
+[[lead]]
+target = "https://www.boldtendencies.com/"
+reason = "Bold Tendencies. Art, music and opera on a Peckham car park roof."
+priority = 45
+
+[[lead]]
+target = "https://open-city.org.uk/"
+reason = "Open City / Open House Festival. Buildings normally closed to the public open each September."
+priority = 70
+
+[[lead]]
+target = "https://totallythames.org/"
+reason = "Thames Festival Trust. River events, foreshore walks and art each September."
+priority = 50
+
+[[lead]]
+target = "https://ngs.org.uk/"
+reason = "National Garden Scheme. Private London gardens open on set days."
+priority = 40
+
+# Cool and unusual places
+
+[[lead]]
+target = "https://www.crossness.org.uk/"
+reason = "Crossness Pumping Station. Victorian 'cathedral of sewage', open on steaming days."
+priority = 60
+
+[[lead]]
+target = "https://thebrunelmuseum.com/"
+reason = "Brunel Museum. Descend into the Thames Tunnel shaft; events in the shaft."
+priority = 55
+
+[[lead]]
+target = "https://www.testingmuseum.org.uk/"
+reason = "Kirkaldy Testing Museum. Victorian materials-testing machine in Southwark."
+priority = 55
+
+[[lead]]
+target = "https://www.novelty-automation.com/"
+reason = "Novelty Automation. Satirical homemade arcade machines in Holborn."
+priority = 55
+
+[[lead]]
+target = "https://www.thelasttuesdaysociety.org/"
+reason = "Viktor Wynd Museum of Curiosities. Cabinet of oddities with a bar."
+priority = 55
+
+[[lead]]
+target = "https://www.dennissevershouse.co.uk/"
+reason = "Dennis Severs' House. Immersive 18th-century Spitalfields house, visited in silence."
+priority = 50
+
+[[lead]]
+target = "https://www.soane.org/"
+reason = "Sir John Soane's Museum. Architect's house crammed with collections; candlelit openings."
+priority = 50
+
+[[lead]]
+target = "https://oldoperatingtheatre.com/"
+reason = "Old Operating Theatre. 1822 surgical theatre in a church garret."
+priority = 50
+
+[[lead]]
+target = "https://www.godsownjunkyard.co.uk/"
+reason = "God's Own Junkyard. Warehouse of neon signs in Walthamstow."
+priority = 45
+
+[[lead]]
+target = "https://crossbones.org.uk/"
+reason = "Cross Bones Graveyard. Medieval outcasts' burial ground and memorial vigils."
+priority = 50
+
+[[lead]]
+target = "https://abneypark.org/"
+reason = "Abney Park. Overgrown Victorian garden cemetery and arboretum."
+priority = 40
+
+[[lead]]
+target = "https://www.fonc.org.uk/"
+reason = "Friends of Nunhead Cemetery. Tours of a Magnificent Seven cemetery, including catacombs."
+priority = 45
+
+[[lead]]
+target = "https://thamesdiscovery.org/"
+reason = "Thames Discovery Programme (MOLA). Foreshore archaeology walks."
+priority = 55
+
+[[lead]]
+target = "https://www.layersoflondon.org/"
+reason = "Layers of London. Overlay historic maps on the modern city."
+priority = 60
+
+[[lead]]
+target = "https://londontopsoc.org/"
+reason = "London Topographical Society. Publishes facsimile old maps and views."
+priority = 50
+
+[[lead]]
+target = "https://www.ltmuseum.co.uk/hidden-london"
+reason = "Hidden London tours of disused Underground stations (blocks bots; may need search)."
+priority = 60
+
+[[lead]]
+target = "https://www.atlasobscura.com/things-to-do/london-england"
+reason = "Atlas Obscura London. 560+ unusual sites (blocks bots; may need search)."
+priority = 55
