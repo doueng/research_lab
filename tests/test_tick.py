@@ -95,3 +95,15 @@ def test_crashed_tick_resumes_from_checkpoint(tmp_path):
     assert out["tick"] == 1
     assert conn.execute("SELECT count(*) FROM findings").fetchone()[0] == 1
     assert db.get_meta(conn, "scratchpad") == "after https://seed-a"
+
+
+def test_agent_ending_without_structured_response_still_records(tmp_path):
+    # Seen live: after ToolCallLimitMiddleware says "Do not make additional tool calls", the model stops with
+    # plain text and never calls the Investigation tool, so the agent returns no structured_response.
+    conn = seeded(tmp_path)
+    script = tick_script(1, "https://seed-a", "https://n")
+    gives_up = AIMessage("I have used my tool budget.")
+    model = ScriptedModel(responses=[script[0], script[1], gives_up, script[2], script[3]])
+    out = run_tick(conn, build_graph(conn, model, [web_search, fetch_url], InMemorySaver()))
+    assert [f["url"] for f in out["investigation"]["findings"]] == ["https://seed-a"]
+    assert conn.execute("SELECT finished FROM ticks").fetchone()[0] == 1

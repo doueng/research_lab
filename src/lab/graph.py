@@ -118,7 +118,12 @@ def build_graph(conn, model, tools, checkpointer=None):
             HumanMessage(f"{task}\n\nPlanner rationale: {state['plan']['rationale']}\n\n"
                          f"Your scratchpad from earlier ticks:\n{state['scratchpad'] or '(empty)'}"),
         ]})
-        inv: Investigation = out["structured_response"]
+        inv: Investigation | None = out.get("structured_response")
+        if inv is None:
+            # The agent loop does not force the result tool; after the tool-budget message the model may stop.
+            # Ask once more outside the loop, where the budget does not apply.
+            report_now = HumanMessage("Stop researching. Report your Investigation now from what you found.")
+            inv = model.with_structured_output(Investigation).invoke(out["messages"] + [report_now])
         # Cheap validator: drop findings whose URL never appeared in a tool result (hallucinated sources).
         # Only real tool results count. ToolStrategy adds its own ToolMessage echoing the response itself.
         names = {t.name for t in tools}
