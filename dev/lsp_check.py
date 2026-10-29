@@ -1,9 +1,9 @@
-"""Talk LSP to pylsp the way the editor does and check that it understands this project.
+"""Talk LSP to pylsp and ruff the way the editor does and check that they understand this project.
 
 Run from the project root inside the dev env (direnv or `source dev/env.sh`):  python dev/lsp_check.py
-Checks: go-to-definition of a LangChain import lands in .venv, of a project import lands in src/,
-and the files under src/ have no diagnostics. Runs once with pylsp's defaults and once with the settings
-Emacs lsp-mode sends (flake8 as config source, pydocstyle on). Exit 1 on failure.
+Checks: with the settings Emacs lsp-mode sends here (.dir-locals.el turns pylsp's linters off), go-to-definition
+of a LangChain import lands in .venv and of a project import lands in src/; pylsp and `ruff server` (lsp-mode's
+ruff add-on client, config in pyproject.toml) report no diagnostics for the files under src/. Exit 1 on failure.
 """
 
 import json
@@ -74,18 +74,18 @@ class Server:
 
 
 def position(text, needle):
-    line_no = next(i for i, l in enumerate(text.splitlines()) if needle in l)
+    line_no = next(i for i, line in enumerate(text.splitlines()) if needle in line)
     return {"line": line_no, "character": text.splitlines()[line_no].index(needle) + 1}
 
 
-# What lsp-mode's lsp-pylsp sends by default (lsp-pylsp-configuration-sources etc.).
-LSP_MODE = {"pylsp": {"configurationSources": ["flake8"], "plugins": {
-    "flake8": {"enabled": True}, "pycodestyle": {"enabled": False}, "pydocstyle": {"enabled": True}}}}
+# What lsp-mode's lsp-pylsp sends with .dir-locals.el applied: every lint plugin off, ruff lints instead.
+PYLSP = {"pylsp": {"configurationSources": ["flake8"], "plugins": {
+    p: {"enabled": False} for p in ["flake8", "pycodestyle", "pyflakes", "pydocstyle", "mccabe"]}}}
 
 
-def check(label, settings):
+def check(label, cmd, settings=None, definitions=True):
     print(f"== {label}")
-    s = Server([shutil.which("pylsp") or sys.exit("pylsp not on PATH")])
+    s = Server([shutil.which(cmd[0]) or sys.exit(f"{cmd[0]} not on PATH"), *cmd[1:]])
     s.send("initialize", {"processId": os.getpid(), "rootUri": ROOT.as_uri(), "capabilities": {}})
     s.send("initialized", {}, notify=True)
     if settings:
@@ -97,7 +97,7 @@ def check(label, settings):
                                                          "version": 1, "text": f.read_text()}}, notify=True)
     text = FILE.read_text()
     doc = {"uri": FILE.as_uri()}
-    for needle, want in [("create_agent", ROOT / ".venv"), ("db.frontier", ROOT / "src")]:
+    for needle, want in [] if not definitions else [("create_agent", ROOT / ".venv"), ("db.frontier", ROOT / "src")]:
         pos = position(text, needle if needle != "db.frontier" else "frontier(conn")
         res = s.send("textDocument/definition", {"textDocument": doc, "position": pos}) or []
         paths = [Path(r["uri"].removeprefix("file://")) for r in res]
@@ -115,7 +115,8 @@ def check(label, settings):
 
 
 def main():
-    failures = check("pylsp defaults", None) + check("Emacs lsp-mode settings", LSP_MODE)
+    failures = check("pylsp (Emacs lsp-mode settings)", ["pylsp"], PYLSP) + \
+        check("ruff server", ["ruff", "server"], definitions=False)
     sys.exit(1 if failures else 0)
 
 

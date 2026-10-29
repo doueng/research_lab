@@ -2,7 +2,9 @@
 root="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)"
 venv="$root/.venv"
 
-# GC-rooted profile at a stable path, so the venv's base python survives guix gc.
+# GC-rooted profile at a stable path, so the venv's base python survives guix gc. guix shell --root will not
+# replace an existing link ("File exists" after a manifest change), so drop the old one first.
+rm -f "$root/.guix-profile"
 guix shell -m "$root/manifest.scm" --root="$root/.guix-profile" -- true || return 1
 GUIX_PROFILE="$root/.guix-profile"
 . "$GUIX_PROFILE/etc/profile"

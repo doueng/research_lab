@@ -6,6 +6,7 @@
  '("python@3.12"
    "uv"
    "gcc-toolchain"   ; libgcc_s for manylinux wheels (pydantic-core, jiter, ormsgpack, primp, uuid-utils)
+   "ruff"            ; linter, config in pyproject.toml; PyPI's ruff wheel cannot run on Guix System
    "sqlite"          ; sqlite3 CLI to inspect the datarooms (data/*.db)
    "git"
    "coreutils"

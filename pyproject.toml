@@ -23,6 +23,16 @@ lab = "lab.cli:main"
 requires = ["hatchling"]  # pure Python; uv_build ships a binary that cannot run on Guix System
 build-backend = "hatchling.build"
 
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "D"]  # pycodestyle, pyflakes, pydocstyle
+ignore = ["D1"]  # missing-docstring checks; formatting rules for docstrings that exist still apply
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
 [dependency-groups]
 dev = [
     "pytest>=9.2.0",

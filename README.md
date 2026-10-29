@@ -14,8 +14,10 @@ once, or from bash with `source dev/env.sh`. Python deps live in `uv.lock`, sinc
 ## Editor / LSP
 
 Python LSP is `pylsp` from Guix Home. With `direnv allow` done, Emacs envrc-mode exports this project's
-`VIRTUAL_ENV`, so pylsp resolves imports from `.venv`. Linter settings live in `setup.cfg`.
-`python dev/lsp_check.py` (inside the dev env) checks go-to-definition and diagnostics the way the editor sees them.
+`VIRTUAL_ENV`, so pylsp resolves imports from `.venv`. Linting is ruff (from `manifest.scm`, config in `pyproject.toml`).
+Run `ruff check` on the command line. In Emacs, lsp-mode's ruff add-on client starts because ruff is on PATH, and
+`.dir-locals.el` turns pylsp's own linters off. `python dev/lsp_check.py` (inside the dev env) checks go-to-definition
+and diagnostics the way the editor sees them.
 
 ## Credentials (.env)
 

@@ -22,13 +22,13 @@ def call(name, args, i):
 
 @tool
 def web_search(query: str) -> str:
-    """stub"""
+    """Stub."""
     return "Shepherd timers thread\nhttps://lists.gnu.org/x/timers.html\nargument about timers"
 
 
 @tool
 def fetch_url(url: str) -> str:
-    """stub"""
+    """Stub."""
     return f"<untrusted_page url='{url}'>page text</untrusted_page>"
 
 
@@ -63,7 +63,7 @@ def test_two_ticks_continue_across_fresh_graphs(tmp_path):
     # Fresh connection and graph, as if `lab tick` ran again in a new process.
     conn = db.connect(tmp_path / "lab.db")
     assert db.get_meta(conn, "scratchpad") == "after https://seed-a"
-    front = [l["target"] for l in db.frontier(conn)]
+    front = [lead["target"] for lead in db.frontier(conn)]
     assert front[0] == "https://lead-from-tick-1" and "https://seed-a" not in front
 
     # Tick 2 reports the same URL again: the dataroom must not duplicate it.
