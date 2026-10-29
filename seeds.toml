@@ -1,0 +1,40 @@
+[lab]
+objective = """
+Build deep, practical understanding of GNU Guix as a daily-driver OS: Guix System and Guix Home
+configuration, writing services and packages, channels, and real-world Linux configs built on it.
+The owner runs Guix System on Apple Silicon (Asahi) with Guix Home, so hardware enablement,
+aarch64 quirks and home-service patterns are especially relevant.
+Prefer rare, high-signal sources: guix-devel / help-guix threads where design decisions were argued,
+commit messages and reviews on Codeberg, personal config repos of experienced users, Guix Days talks,
+and practitioner blogs. Avoid beginner listicles unless nothing better exists.
+"""
+
+[[lead]]
+target = "https://guix.gnu.org/cookbook/en/html_node/index.html"
+reason = "Official cookbook. Baseline map of topics, to spot what the rare sources go beyond."
+priority = 55
+
+[[lead]]
+target = "https://lists.gnu.org/archive/html/guix-devel/"
+reason = "guix-devel archive. Design arguments and RFCs live here, not in the manual."
+priority = 80
+
+[[lead]]
+target = "https://git.sr.ht/~abcdw/rde"
+reason = "rde by Andrew Tropin. Opinionated Guix-based distro/config framework with novel home-service ideas."
+priority = 75
+
+[[lead]]
+target = "https://gitlab.com/nonguix/nonguix"
+reason = "nonguix channel. Where real hardware-support and firmware trade-offs show up."
+priority = 60
+
+[[lead]]
+target = "Who runs Guix System on Apple Silicon / Asahi, and what kernels, channels and workarounds do they use?"
+reason = "Directly relevant to the owner's machine; likely scattered across mailing lists, IRC logs and personal repos."
+priority = 85
+
+[[lead]]
+target = "https://guix.gnu.org/en/blog/"
+reason = "Guix blog. Deep-dive posts by core developers (e.g. on bootstrapping, shepherd, home)."
+priority = 50
