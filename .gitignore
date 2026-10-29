@@ -1,4 +1,6 @@
 .venv/
+.guix-profile
+.direnv/
 __pycache__/
 *.db
 *.db-*

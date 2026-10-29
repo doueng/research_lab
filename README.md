@@ -4,18 +4,26 @@ A seeded, stateful research agent that hunts for *rare tokens* (high-signal, lit
 The research subject is GNU Guix and Linux configs built on it. The real goal is learning LangChain and LangGraph.
 It is based on the "self-editing heartbeats with seeds" idea, but runs are manual: one `lab tick` = one heartbeat.
 
+## Dev environment (Guix)
+
+`manifest.scm` supplies python 3.12, uv, gcc-toolchain, sqlite and git. `dev/env.sh` builds that profile,
+runs `uv sync --frozen` into `.venv` (using only the Guix python) and activates it. Enter it with `direnv allow`
+once, or from bash with `source dev/env.sh`. Python deps live in `uv.lock`, since Guix does not package LangChain.
+
 ## Use
 
+Inside the dev environment (`.venv` active):
+
 ```sh
-export ANTHROPIC_API_KEY=...            # or LAB_MODEL=openai:gpt-... with langchain-openai added
-uv run lab seed                         # load seeds.toml (idempotent)
-uv run lab tick                         # one research iteration on exactly one lead
-uv run lab status                       # scratchpad + frontier
-uv run lab findings                     # what has been saved
-uv run lab rate 3 5                     # your 1-5 rating: the ground truth for future evals
-uv run lab lead URL "why" 90            # steer it by hand
-sqlite3 lab.db                          # the dataroom is plain SQLite
-uv run pytest -q                        # deterministic tests, no API key needed
+export ANTHROPIC_API_KEY=...   # or LAB_MODEL=openai:gpt-... with langchain-openai added
+lab seed                       # load seeds.toml (idempotent)
+lab tick                       # one research iteration on exactly one lead
+lab status                     # scratchpad + frontier
+lab findings                   # what has been saved
+lab rate 3 5                   # your 1-5 rating: the ground truth for future evals
+lab lead URL "why" 90          # steer it by hand
+sqlite3 lab.db                 # the dataroom is plain SQLite
+pytest -q                      # deterministic tests, no API key needed
 ```
 
 If a tick crashes, the next `lab tick` resumes it from the last checkpointed node (lab.ckpt.db).
