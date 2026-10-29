@@ -10,12 +10,21 @@ It is based on the "self-editing heartbeats with seeds" idea, but runs are manua
 runs `uv sync --frozen` into `.venv` (using only the Guix python) and activates it. Enter it with `direnv allow`
 once, or from bash with `source dev/env.sh`. Python deps live in `uv.lock`, since Guix does not package LangChain.
 
+## Credentials (.env)
+
+`cp .env.example .env` and fill it in. `.env` is gitignored and loaded by `lab` (already-set env vars win).
+
+- `LAB_MODEL=codex:gpt-6-sol` uses your ChatGPT subscription through the Codex backend. The token is read
+  from Pi's login file (`CODEX_AUTH_FILE`) and never copied, because it expires and Pi rotates it. If it has
+  expired, start `pi` once. Other specs (e.g. `openai:gpt-...`) go to `init_chat_model` and need API keys.
+- `TAVILY_API_KEY` for web search.
+- `LANGSMITH_*` for tracing. Each tick shows up as a `LangGraph` trace in the `research-lab` project.
+
 ## Use
 
 Inside the dev environment (`.venv` active):
 
 ```sh
-export ANTHROPIC_API_KEY=...   # or LAB_MODEL=openai:gpt-... with langchain-openai added
 lab seed                       # load seeds.toml (idempotent)
 lab tick                       # one research iteration on exactly one lead
 lab status                     # scratchpad + frontier

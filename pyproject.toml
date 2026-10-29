@@ -5,12 +5,14 @@ description = "Seeded, stateful research agent built to learn LangChain/LangGrap
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "ddgs>=9.16.1",
     "httpx>=0.28.1",
     "langchain>=1.0",
     "langchain-anthropic>=1.7.7",
+    "langchain-openai>=1.7.3",
+    "langchain-tavily>=0.2.18",
     "langgraph>=1.2.18",
     "langgraph-checkpoint-sqlite>=3.1.2",
+    "python-dotenv>=1.2.4",
 ]
 
 [project.scripts]

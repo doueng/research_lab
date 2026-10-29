@@ -5,10 +5,13 @@ import os
 import sqlite3
 import tomllib
 
+from dotenv import find_dotenv, load_dotenv
+
 from lab import db
 
+load_dotenv(find_dotenv(usecwd=True))  # .env from the working directory up; already-set env vars win
 DB = os.environ.get("LAB_DB", "lab.db")
-MODEL = os.environ.get("LAB_MODEL", "anthropic:claude-sonnet-4-5")
+MODEL = os.environ.get("LAB_MODEL", "codex:gpt-6-sol")
 
 
 def cmd_seed(conn, a):
@@ -33,13 +36,14 @@ def cmd_status(conn, a):
 
 
 def cmd_tick(conn, a):
-    from langchain.chat_models import init_chat_model
     from langgraph.checkpoint.sqlite import SqliteSaver
 
     from lab.graph import build_graph, run_tick
+    from lab.models import chat_model
+    from lab.tools import default_tools
 
     ckpt = SqliteSaver(sqlite3.connect(DB.removesuffix(".db") + ".ckpt.db", check_same_thread=False))
-    out = run_tick(conn, build_graph(conn, init_chat_model(MODEL), checkpointer=ckpt))
+    out = run_tick(conn, build_graph(conn, chat_model(MODEL), default_tools(), checkpointer=ckpt))
     inv = out["investigation"]
     print(f"tick {out['tick']}: {out['lead']['target'] if out['lead'] else 'explore: ' + out['plan']['explore_query']}")
     print(f"  {inv['summary']}")

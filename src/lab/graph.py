@@ -14,7 +14,6 @@ from langgraph.graph import END, START, StateGraph
 from pydantic import BaseModel, Field
 
 from lab import db
-from lab.tools import TOOLS
 
 MAX_TOOL_CALLS = 12
 SCRATCHPAD_CHARS = 2500
@@ -80,7 +79,7 @@ Rules:
 """
 
 
-def build_graph(conn, model, tools=TOOLS, checkpointer=None):
+def build_graph(conn, model, tools, checkpointer=None):
     investigator = create_agent(
         model,
         tools,

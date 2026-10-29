@@ -34,16 +34,6 @@ class _Text(HTMLParser):
 
 
 @tool
-def web_search(query: str) -> str:
-    """Search the web. Use site: operators to reach niche sources, e.g.
-    'site:lists.gnu.org guix-devel home services' or 'site:codeberg.org guix home-service'."""
-    from ddgs import DDGS
-
-    hits = DDGS().text(query, max_results=8)
-    return "\n\n".join(f"{h['title']}\n{h['href']}\n{h['body']}" for h in hits) or "no results"
-
-
-@tool
 def fetch_url(url: str) -> str:
     """Fetch a web page and return its readable text plus outbound links."""
     r = httpx.get(url, follow_redirects=True, timeout=20, headers={"User-Agent": "research-lab/0.1"})
@@ -60,4 +50,8 @@ def fetch_url(url: str) -> str:
     return f"<untrusted_page url='{url}'>\n{text}\n</untrusted_page>\n<links>\n{links}\n</links>"
 
 
-TOOLS = [web_search, fetch_url]
+def default_tools():
+    """Built at CLI time so importing lab.graph (tests) needs no TAVILY_API_KEY."""
+    from langchain_tavily import TavilySearch
+
+    return [TavilySearch(max_results=8), fetch_url]
